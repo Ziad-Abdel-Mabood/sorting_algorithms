@@ -12,14 +12,14 @@ void bubble_sort(int *array, size_t size)
 	unsigned int k = 0;
 	unsigned int i = 0;
 
-	for(; k < size; k++)
+	for (; k < size; k++)
 	{
 		i = 0;
 		count = 0;
-		for(; i < size - 1; i++)
+		for (; i < size - 1; i++)
 		{
 			/* if unsorted then swap */
-			if(array[i] > array[i + 1])
+			if (array[i] > array[i + 1])
 			{
 				temp = array[i];
 				array[i] = array[i + 1];
@@ -28,7 +28,7 @@ void bubble_sort(int *array, size_t size)
 				print_array(array, size);
 			}
 		}
-		if(count == 0)
+		if (count == 0)
 			return;
 	}
 }
