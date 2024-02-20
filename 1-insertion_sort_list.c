@@ -11,9 +11,12 @@ void swap_dbl_list(listint_t *node);
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *ptr1 = (*list)->next;
+	listint_t *ptr1;
 	listint_t *ptr2;
 
+	if (!list)
+		return;
+	ptr1 = (*list)->next;
 	/* iterate over the list */
 	while (ptr1)
 	{
