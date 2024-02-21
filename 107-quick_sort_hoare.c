@@ -5,11 +5,11 @@ size_t hoare_partition(int *array, size_t size, ssize_t low, ssize_t high);
 void swap_array(int *array, size_t size, int *from, int *to);
 
 /**
- * quick_sort -	sorts an array of integers in ascending
- *		order using the quick sort algorithm.
- * @array:	array to be sorted.
- * @size:	size of the array.
- * Return:	nothing.
+ * quick_sort_hoare -	sorts an array of integers in ascending
+ *			order using the quick sort algorithm.
+ * @array:		array to be sorted.
+ * @size:		size of the array.
+ * Return:		nothing.
  */
 void quick_sort_hoare(int *array, size_t size)
 {
@@ -61,7 +61,7 @@ size_t hoare_partition(int *array, size_t size, ssize_t low, ssize_t high)
 		} while (array[i] < pivot);
 
 		do {
-			j --;
+			j--;
 		} while (array[j] > pivot);
 		if (i >= j)
 			return (j);
