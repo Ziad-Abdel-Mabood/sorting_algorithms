@@ -13,7 +13,7 @@ void swap_array(int *array, size_t size, int *from, int *to);
  */
 void quick_sort_hoare(int *array, size_t size)
 {
-	if (size && array)
+	if (size && array && size > 1)
 		sort(array, size, 0, size - 1);
 }
 
