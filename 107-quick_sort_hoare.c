@@ -1,7 +1,7 @@
 #include "sort.h"
 
 void sort(int *array, size_t size, ssize_t low, ssize_t high);
-size_t lomuto_partition(int *array, size_t size, ssize_t low, ssize_t high);
+size_t hoare_partition(int *array, size_t size, ssize_t low, ssize_t high);
 void swap_array(int *array, size_t size, int *from, int *to);
 
 /**
@@ -11,7 +11,7 @@ void swap_array(int *array, size_t size, int *from, int *to);
  * @size:	size of the array.
  * Return:	nothing.
  */
-void quick_sort(int *array, size_t size)
+void quick_sort_hoare(int *array, size_t size)
 {
 	if (size && array)
 		sort(array, size, 0, size - 1);
@@ -31,16 +31,16 @@ void sort(int *array, size_t size, ssize_t low, ssize_t high)
 
 	if (low < high)
 	{
-		pivot_index = lomuto_partition(array, size, low, high);
+		pivot_index = hoare_partition(array, size, low, high);
 
 		/* recursion: on two partitions of the array */
-		sort(array, size, low, pivot_index - 1);
 		sort(array, size, pivot_index + 1, high);
+		sort(array, size, low, pivot_index);
 	}
 }
 
 /**
- * lomuto_partition -	separates an array into two partitions; larger
+ * hoare_partition -	separates an array into two partitions; larger
  *			and smaller than pivot.
  * @array:		array to be partitioned.
  * @size:		size of the array.
@@ -48,26 +48,25 @@ void sort(int *array, size_t size, ssize_t low, ssize_t high)
  * @high:		ending index of the partition.
  * Return:		index of the pivot after it's put in its place.
  */
-size_t lomuto_partition(int *array, size_t size, ssize_t low, ssize_t high)
+size_t hoare_partition(int *array, size_t size, ssize_t low, ssize_t high)
 {
-	int *pivot = array + high;
+	int pivot = array[low];
 	int i = low - 1;
-	int j;
+	int j = high + 1;
 
-	/* iterate over the array */
-	for (j = low; j < high; j++)
+	while (1)
 	{
-		/* if smaller than pivot; go to the beginning */
-		if (array[j] <= *pivot)
-		{
+		do {
 			i++;
-			swap_array(array, size, array + i, array + j);
-		}
+		} while (array[i] < pivot);
+
+		do {
+			j --;
+		} while (array[j] > pivot);
+		if (i >= j)
+			return (j);
+		swap_array(array, size, array + i, array + j);
 	}
-	/* swap pivot to its correct place */
-	swap_array(array, size, array + i + 1, pivot);
-	/* return the pivot index */
-	return (i + 1);
 }
 
 /**
